@@ -1,0 +1,75 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build Spring Boot Backend
+        run: |
+          cd backend
+          chmod +x mvnw
+          ./mvnw clean package -DskipTests
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Build React Frontend
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+      - name: Copy Files to EC2 via SCP
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          # We transfer the backend JAR and the frontend dist folder
+          source: "backend/target/*.jar,frontend/dist/*"
+          target: "/home/ec2-user/deploy-temp/"
+          strip_components: 1
+
+      - name: Execute Deployment Script via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Moving frontend files to Nginx directory..."
+            sudo rm -rf /var/www/html/*
+            sudo cp -r /home/ec2-user/deploy-temp/frontend/dist/* /var/www/html/
+            
+            echo "Moving backend JAR..."
+            sudo mkdir -p /opt/aws-ec2-backend
+            sudo cp /home/ec2-user/deploy-temp/backend/target/*.jar /opt/aws-ec2-backend/app.jar
+            
+            echo "Cleaning up temp deployment files..."
+            rm -rf /home/ec2-user/deploy-temp
+            
+            echo "Restarting backend systemd service..."
+            sudo systemctl restart backend
+            
+            echo "Restarting Nginx..."
+            sudo systemctl restart nginx
