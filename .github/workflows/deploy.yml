@@ -60,11 +60,11 @@ jobs:
             echo "Moving frontend files to Nginx directory..."
             sudo mkdir -p /var/www/shivani
             sudo rm -rf /var/www/shivani/*
-            sudo cp -r /home/ec2-user/deploy-temp/frontend/dist/* /var/www/shivani/
+            sudo cp -r /home/ec2-user/deploy-temp/dist/* /var/www/shivani/
             
             echo "Moving backend JAR..."
             sudo mkdir -p /opt/aws-ec2-backend
-            sudo cp /home/ec2-user/deploy-temp/backend/target/*.jar /opt/aws-ec2-backend/app.jar
+            sudo cp /home/ec2-user/deploy-temp/target/*.jar /opt/aws-ec2-backend/app.jar
             
             echo "Cleaning up temp deployment files..."
             rm -rf /home/ec2-user/deploy-temp
