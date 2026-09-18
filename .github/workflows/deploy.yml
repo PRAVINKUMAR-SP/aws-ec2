@@ -58,8 +58,9 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             echo "Moving frontend files to Nginx directory..."
-            sudo rm -rf /var/www/html/*
-            sudo cp -r /home/ec2-user/deploy-temp/frontend/dist/* /var/www/html/
+            sudo mkdir -p /var/www/shivani
+            sudo rm -rf /var/www/shivani/*
+            sudo cp -r /home/ec2-user/deploy-temp/frontend/dist/* /var/www/shivani/
             
             echo "Moving backend JAR..."
             sudo mkdir -p /opt/aws-ec2-backend
@@ -69,7 +70,7 @@ jobs:
             rm -rf /home/ec2-user/deploy-temp
             
             echo "Restarting backend systemd service..."
-            sudo systemctl restart backend
+            sudo systemctl restart shivani-backend
             
             echo "Restarting Nginx..."
             sudo systemctl restart nginx
