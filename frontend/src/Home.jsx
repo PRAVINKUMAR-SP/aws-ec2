@@ -10,7 +10,7 @@ const Home = () => {
 
     return (
         <div className="glass-card" style={{ textAlign: 'center' }}>
-            <h1>Welcome to our website</h1>
+            <h1>wellcome to our project created by pravinkumar</h1>
             <p style={{ margin: '20px 0', color: 'var(--text-muted)' }}>
                 You have successfully logged in.
             </p>
