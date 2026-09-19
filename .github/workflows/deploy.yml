@@ -62,6 +62,9 @@ jobs:
             sudo rm -rf /var/www/shivani/*
             sudo cp -r /home/ec2-user/deploy-temp/dist/* /var/www/shivani/
             
+            echo "Stopping backend systemd service..."
+            sudo systemctl stop shivani-backend
+            
             echo "Moving backend JAR..."
             sudo mkdir -p /opt/aws-ec2-backend
             sudo cp /home/ec2-user/deploy-temp/target/*.jar /opt/aws-ec2-backend/app.jar
@@ -69,8 +72,8 @@ jobs:
             echo "Cleaning up temp deployment files..."
             rm -rf /home/ec2-user/deploy-temp
             
-            echo "Restarting backend systemd service..."
-            sudo systemctl restart shivani-backend
+            echo "Starting backend systemd service..."
+            sudo systemctl start shivani-backend
             
             echo "Restarting Nginx..."
             sudo systemctl restart nginx
