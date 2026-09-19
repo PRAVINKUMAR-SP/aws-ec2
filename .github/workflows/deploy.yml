@@ -65,8 +65,8 @@ jobs:
             echo "Stopping backend systemd service..."
             sudo systemctl stop shivani-backend
             
-            echo "Force killing any stray process on port 8080..."
-            sudo fuser -k 8080/tcp || true
+            echo "Force killing any stray Java process..."
+            sudo pkill -9 -f java || true
             
             echo "Moving backend JAR..."
             sudo mkdir -p /opt/aws-ec2-backend
