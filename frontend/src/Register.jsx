@@ -104,11 +104,12 @@ const Register = () => {
                                 <div className="relative">
                                     <input 
                                         className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-gray-50 text-gray-900 text-sm focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all outline-none"
-                                        type="password" 
+                                        type="password"
                                         value={password} 
                                         onChange={e => setPassword(e.target.value)} 
                                         placeholder="••••••••"
                                         required
+                                        autoComplete="new-password"
                                     />
                                 </div>
                                 <p className="mt-2 text-xs text-gray-500">Must be at least 8 characters.</p>
