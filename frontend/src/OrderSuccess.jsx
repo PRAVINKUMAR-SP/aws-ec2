@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import PageTitle from './components/PageTitle';
 import { useCart } from './context/CartContext';
 
 const OrderSuccess = () => {
@@ -17,7 +18,8 @@ const OrderSuccess = () => {
     const orderId = location.state?.orderId || ("ORD-" + Math.floor(Math.random() * 100000000));
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
+        <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col font-sans">
+            <PageTitle title="Order Success | A2Z~cart" />
             <Navbar />
             <div className="flex-grow flex flex-col items-center justify-center py-16 px-4">
                 <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-100 max-w-lg w-full text-center">

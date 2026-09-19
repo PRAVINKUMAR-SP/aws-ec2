@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import PageTitle from './components/PageTitle';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -34,6 +35,7 @@ const Login = () => {
 
     return (
         <div className="min-h-screen bg-page flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <PageTitle title="Login | A2Z~cart" />
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-4xl relative animate-fade-in-up">
                 <div className="bg-white py-0 px-0 shadow-xl rounded-2xl overflow-hidden sm:px-0 flex flex-col md:flex-row border border-gray-100">
                     

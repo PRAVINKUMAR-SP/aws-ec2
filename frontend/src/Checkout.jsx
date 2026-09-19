@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import PageTitle from './components/PageTitle';
 import AddressForm from './components/AddressForm';
 import { useCart } from './context/CartContext';
 
@@ -61,10 +62,11 @@ const Checkout = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900">
+        <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+            <PageTitle title="Checkout | A2Z~cart" />
             <Navbar />
             
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10">
                 <h1 className="text-3xl font-bold text-gray-900 mb-8">Secure Checkout</h1>
                 
                 <div className="flex flex-col lg:flex-row gap-8">

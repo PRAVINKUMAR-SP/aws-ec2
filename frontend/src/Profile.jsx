@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import PageTitle from './components/PageTitle';
 import AddressForm from './components/AddressForm';
 import { useCart } from './context/CartContext';
 
@@ -24,10 +25,11 @@ const Profile = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
+        <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+            <PageTitle title="My Profile | A2Z~cart" />
             <Navbar />
             
-            <main className="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10">
+            <main className="flex-grow max-w-4xl mx-auto w-full px-4 py-8">
                 <h1 className="text-3xl font-bold text-gray-900 mb-8 pb-4 border-b border-gray-200">My Profile</h1>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

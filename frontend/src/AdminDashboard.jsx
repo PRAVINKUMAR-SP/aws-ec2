@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from './components/Navbar';
+import PageTitle from './components/PageTitle';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -92,7 +93,8 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+            <PageTitle title="Admin Dashboard | A2Z~cart" />
             <Navbar />
             <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
                 {/* Sidebar */}

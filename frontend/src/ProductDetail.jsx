@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import PageTitle from './components/PageTitle';
+import Loader from './components/Loader';
 import { useCart } from './context/CartContext';
 const ProductDetail = () => {
     const { id } = useParams();
@@ -30,27 +32,12 @@ const ProductDetail = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-page text-gray-900">
+            <div className="min-h-screen bg-page flex flex-col">
                 <Navbar />
-                <div className="max-w-7xl mx-auto px-4 py-10">
-                    {/* Skeleton Loader */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0px', minHeight: '600px' }} className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
-                        <div className="flex items-center justify-center" style={{ backgroundColor: '#f9fafb' }}>
-                            <div className="w-64 h-64 rounded-2xl animate-pulse" style={{ backgroundColor: '#e5e7eb' }}></div>
-                        </div>
-                        <div className="p-10 space-y-4">
-                            <div className="w-20 h-6 rounded-full animate-pulse" style={{ backgroundColor: '#e5e7eb' }}></div>
-                            <div className="w-3/4 h-8 rounded-lg animate-pulse" style={{ backgroundColor: '#e5e7eb' }}></div>
-                            <div className="w-1/4 h-6 rounded-lg animate-pulse" style={{ backgroundColor: '#e5e7eb' }}></div>
-                            <div className="w-1/2 h-10 rounded-lg animate-pulse" style={{ backgroundColor: '#e5e7eb' }}></div>
-                            <div className="w-full h-20 rounded-lg animate-pulse" style={{ backgroundColor: '#e5e7eb' }}></div>
-                            <div className="flex gap-4 pt-6">
-                                <div className="flex-1 h-14 rounded-xl animate-pulse" style={{ backgroundColor: '#e5e7eb' }}></div>
-                                <div className="flex-1 h-14 rounded-xl animate-pulse" style={{ backgroundColor: '#e5e7eb' }}></div>
-                            </div>
-                        </div>
-                    </div>
+                <div className="flex-grow flex items-center justify-center">
+                    <Loader size="lg" message="Loading product details..." />
                 </div>
+                <Footer />
             </div>
         );
     }
@@ -86,10 +73,11 @@ const ProductDetail = () => {
         ];
 
     return (
-        <div className="min-h-screen text-gray-900" style={{ backgroundColor: '#f1f3f6' }}>
+        <div className="min-h-screen bg-page flex flex-col text-gray-900 font-sans">
+            <PageTitle title={product ? `${product.title} | A2Z~cart` : "Product | A2Z~cart"} />
             <Navbar />
 
-            <main className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-3 md:py-5">
+            <main className="flex-grow max-w-[1500px] w-full mx-auto px-0 md:px-6 lg:px-10 py-0 md:py-8">
                 {/* Breadcrumb */}
                 <nav className="flex items-center text-[10px] md:text-xs text-gray-400 mb-3 md:mb-5 font-medium">
                     <button onClick={() => navigate('/main')} className="hover:text-accent transition-colors flex items-center gap-1">

@@ -4,6 +4,8 @@ import CategorySlider from './components/CategorySlider';
 import ProductCard from './components/ProductCard';
 import Slider from './components/Slider';
 import Footer from './components/Footer';
+import PageTitle from './components/PageTitle';
+import Loader from './components/Loader';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -83,6 +85,7 @@ const Home = () => {
 
     return (
         <div className="flex flex-col min-h-screen bg-page">
+            <PageTitle title="A2Z~cart | Home" />
             <Navbar onSearch={handleSearch} onReset={handleReset} />
             <CategorySlider onCategorySelect={handleCategorySelect} activeCategory={activeCategory} />
             
@@ -92,9 +95,7 @@ const Home = () => {
                 {error && <div className="bg-red-100 text-red-600 border border-red-300 p-3 rounded-sm m-5 text-center text-sm">{error}</div>}
                 
                 {loading ? (
-                    <div className="text-center mt-12 text-gray-500">
-                        Loading products...
-                    </div>
+                    <Loader size="lg" message="Loading premium products..." />
                 ) : (
                     <div className="max-w-[1500px] mx-auto px-3 md:px-10 py-4 md:py-8">
                         <div className="flex items-center justify-between mb-4 md:mb-8">

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import PageTitle from './components/PageTitle';
 import { useCart } from './context/CartContext';
 
 const Cart = () => {
@@ -36,10 +37,11 @@ const Cart = () => {
     }
 
     return (
-        <div className="min-h-screen text-gray-900 bg-gray-50">
+        <div className="min-h-screen text-gray-900 bg-gray-50 flex flex-col">
+            <PageTitle title="Your Cart | A2Z~cart" />
             <Navbar />
             
-            <main className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-4 md:py-10">
+            <main className="flex-grow max-w-7xl w-full mx-auto px-3 md:px-6 lg:px-8 py-4 md:py-10">
                 <h1 className="text-xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-8">Shopping Cart</h1>
                 
                 <div className="flex flex-col lg:flex-row gap-8">
