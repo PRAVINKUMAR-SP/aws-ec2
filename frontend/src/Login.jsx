@@ -16,7 +16,7 @@ const Login = () => {
         setSuccess('');
         setIsLoading(true);
         try {
-            const response = await axios.post('http://localhost:8080/api/auth/login', { email, password });
+            const response = await axios.post(`http://${window.location.hostname}:8080/api/auth/login`, { email, password });
             if (response.data && response.data.email) {
                 localStorage.setItem('userEmail', response.data.email);
             }

@@ -118,7 +118,7 @@ export const CartProvider = ({ children }) => {
         // Also save to backend
         try {
             const userEmail = localStorage.getItem('userEmail') || 'guest@example.com';
-            await axios.post('http://localhost:8080/api/orders', {
+            await axios.post(`http://${window.location.hostname}:8080/api/orders`, {
                 userEmail: userEmail,
                 totalAmount: totalAmount,
                 itemsJson: JSON.stringify(currentCart),

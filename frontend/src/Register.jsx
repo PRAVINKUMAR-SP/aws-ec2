@@ -17,7 +17,7 @@ const Register = () => {
         setSuccess('');
         setIsLoading(true);
         try {
-            await axios.post('http://localhost:8080/api/auth/register', { name, email, password });
+            await axios.post(`http://${window.location.hostname}:8080/api/auth/register`, { name, email, password });
             setSuccess('Registration successful! Redirecting to login...');
             setTimeout(() => navigate('/login'), 2000);
         } catch (err) {

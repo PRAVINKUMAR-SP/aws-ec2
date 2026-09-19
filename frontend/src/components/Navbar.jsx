@@ -37,7 +37,7 @@ const Navbar = ({ onSearch, onReset }) => {
                 return;
             }
             try {
-                const response = await axios.get('http://localhost:8080/api/products');
+                const response = await axios.get(`http://${window.location.hostname}:8080/api/products`);
                 const filtered = response.data.filter(product => 
                     (product.title && product.title.toLowerCase().includes(searchQuery.toLowerCase())) || 
                     (product.category && product.category.toLowerCase().includes(searchQuery.toLowerCase()))

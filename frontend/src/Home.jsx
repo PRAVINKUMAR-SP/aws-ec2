@@ -20,8 +20,8 @@ const Home = () => {
         try {
             setLoading(true);
             const url = searchQuery 
-                ? `http://localhost:8080/api/products/search?q=${searchQuery}`
-                : 'http://localhost:8080/api/products';
+                ? `http://${window.location.hostname}:8080/api/products/search?q=${searchQuery}`
+                : `http://${window.location.hostname}:8080/api/products`;
                 
             const response = await fetch(url);
             if (response.ok) {
@@ -52,7 +52,7 @@ const Home = () => {
         
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:8080/api/products/category/${categoryName}`);
+            const response = await fetch(`http://${window.location.hostname}:8080/api/products/category/${categoryName}`);
             if (response.ok) {
                 const data = await response.json();
                 setProducts(data);

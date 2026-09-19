@@ -28,9 +28,9 @@ const AdminDashboard = () => {
     const fetchAllData = async () => {
         try {
             const [prodRes, userRes, orderRes] = await Promise.all([
-                axios.get('http://localhost:8080/api/products').catch(() => ({data: []})),
-                axios.get('http://localhost:8080/api/users').catch(() => ({data: []})),
-                axios.get('http://localhost:8080/api/orders').catch(() => ({data: []}))
+                axios.get(`http://${window.location.hostname}:8080/api/products`).catch(() => ({data: []})),
+                axios.get(`http://${window.location.hostname}:8080/api/users`).catch(() => ({data: []})),
+                axios.get(`http://${window.location.hostname}:8080/api/orders`).catch(() => ({data: []}))
             ]);
             setProducts(prodRes.data || []);
             setUsers(userRes.data || []);
@@ -43,7 +43,7 @@ const AdminDashboard = () => {
     const handleDeleteProduct = async (id) => {
         if (window.confirm("Are you sure you want to delete this product?")) {
             try {
-                await axios.delete(`http://localhost:8080/api/products/${id}`);
+                await axios.delete(`http://${window.location.hostname}:8080/api/products/${id}`);
                 setProducts(products.filter(p => p.id !== id));
             } catch (err) {
                 console.error("Failed to delete", err);
@@ -54,7 +54,7 @@ const AdminDashboard = () => {
     const handleAddProduct = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8080/api/products', newProduct);
+            await axios.post(`http://${window.location.hostname}:8080/api/products`, newProduct);
             alert("Product added successfully!");
             setNewProduct({ title: '', description: '', price: '', category: '', imageUrl: '', rating: 5.0, reviewCount: 0 });
             fetchAllData(); // Refresh list
