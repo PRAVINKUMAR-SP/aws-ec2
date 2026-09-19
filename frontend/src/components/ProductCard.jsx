@@ -9,12 +9,16 @@ const ProductCard = ({ product, onAddToCart }) => {
             className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full border border-gray-100 group relative cursor-pointer"
         >
             
-            {/* Dynamic Sale Badge */}
-            {product.price < 100 && (
-                <div className="absolute top-3 left-3 md:top-4 md:left-4 bg-red-500 text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-sm z-10 shadow-sm">
+            {/* Dynamic Sale/Stock Badge */}
+            {product.stockQuantity !== undefined && product.stockQuantity <= 0 ? (
+                <div className="absolute top-3 left-3 md:top-4 md:left-4 bg-gray-500 text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-sm z-10 shadow-sm uppercase tracking-wide">
+                    Out of Stock
+                </div>
+            ) : product.price < 100 ? (
+                <div className="absolute top-3 left-3 md:top-4 md:left-4 bg-red-500 text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-sm z-10 shadow-sm uppercase tracking-wide">
                     SALE
                 </div>
-            )}
+            ) : null}
 
             {/* Image Container */}
             <div className="relative w-full h-36 md:h-56 overflow-hidden bg-white flex items-center justify-center p-3 md:p-6">
@@ -59,12 +63,19 @@ const ProductCard = ({ product, onAddToCart }) => {
                         <span className="text-lg md:text-2xl font-extrabold text-gray-900">₹{product.price.toFixed(0)}</span>
                     </div>
                     <button 
-                        className="bg-accent text-white px-2.5 md:px-4 py-1.5 md:py-2 rounded-full font-bold text-xs md:text-sm hover:bg-emerald-600 transition-all duration-300 shadow-md hover:shadow-lg group-hover:scale-105 flex items-center gap-1"
+                        className={`px-2.5 md:px-4 py-1.5 md:py-2 rounded-full font-bold text-xs md:text-sm transition-all duration-300 shadow-md flex items-center gap-1 ${
+                            product.stockQuantity !== undefined && product.stockQuantity <= 0 
+                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                            : 'bg-accent text-white hover:bg-emerald-600 hover:shadow-lg group-hover:scale-105'
+                        }`}
                         onClick={(e) => {
                             e.stopPropagation();
-                            onAddToCart();
+                            if (product.stockQuantity === undefined || product.stockQuantity > 0) {
+                                onAddToCart();
+                            }
                         }}
-                        title="Add to Cart"
+                        disabled={product.stockQuantity !== undefined && product.stockQuantity <= 0}
+                        title={product.stockQuantity !== undefined && product.stockQuantity <= 0 ? "Out of Stock" : "Add to Cart"}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />

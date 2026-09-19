@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import PageTitle from './components/PageTitle';
+import { useCart } from './context/CartContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ const Login = () => {
     const [success, setSuccess] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const { setUserEmail } = useCart();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -20,6 +22,7 @@ const Login = () => {
             const response = await axios.post(`/api/auth/login`, { email, password });
             if (response.data && response.data.email) {
                 localStorage.setItem('userEmail', response.data.email);
+                if (setUserEmail) setUserEmail(response.data.email);
             }
             if (response.data && response.data.role) {
                 localStorage.setItem('userRole', response.data.role);

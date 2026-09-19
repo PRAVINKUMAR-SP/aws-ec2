@@ -8,10 +8,10 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
-    const userEmail = localStorage.getItem('userEmail') || 'guest@example.com';
+    const [userEmail, setUserEmail] = useState(() => localStorage.getItem('userEmail') || 'guest@example.com');
     const cartKey = `a2z_cart_${userEmail}`;
 
-    // Load initial cart from localStorage
+    // Load initial cart from localStorage, and reload if userEmail changes
     const [cart, setCart] = useState(() => {
         try {
             const savedCart = localStorage.getItem(cartKey);
@@ -24,6 +24,20 @@ export const CartProvider = ({ children }) => {
         }
         return [];
     });
+
+    useEffect(() => {
+        try {
+            const savedCart = localStorage.getItem(cartKey);
+            if (savedCart) {
+                const parsed = JSON.parse(savedCart);
+                setCart(Array.isArray(parsed) ? parsed : []);
+            } else {
+                setCart([]);
+            }
+        } catch (e) {
+            setCart([]);
+        }
+    }, [cartKey]);
 
     // Save to localStorage on every change
     useEffect(() => {
@@ -178,7 +192,8 @@ export const CartProvider = ({ children }) => {
         addresses,
         addAddress,
         updateAddress,
-        deleteAddress
+        deleteAddress,
+        setUserEmail
     };
 
     return (

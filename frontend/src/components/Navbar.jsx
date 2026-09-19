@@ -10,7 +10,7 @@ const categories = [
 
 const Navbar = ({ onSearch, onReset }) => {
     const navigate = useNavigate();
-    const { getCartCount } = useCart();
+    const { getCartCount, setUserEmail } = useCart();
     const userEmail = localStorage.getItem('userEmail');
     const userRole = localStorage.getItem('userRole');
     const isAdmin = userRole === 'ADMIN';
@@ -24,6 +24,7 @@ const Navbar = ({ onSearch, onReset }) => {
     const handleLogout = () => {
         localStorage.removeItem('userEmail');
         localStorage.removeItem('userRole');
+        if (setUserEmail) setUserEmail('guest@example.com');
         setMobileMenuOpen(false);
         navigate('/login');
     };
