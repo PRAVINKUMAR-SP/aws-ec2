@@ -167,6 +167,7 @@ const AdminDashboard = () => {
                                             <th className="p-4">Title</th>
                                             <th className="p-4">Category</th>
                                             <th className="p-4">Price</th>
+                                            <th className="p-4">Stock</th>
                                             <th className="p-4 text-center">Actions</th>
                                         </tr>
                                     </thead>
@@ -177,6 +178,13 @@ const AdminDashboard = () => {
                                                 <td className="p-4 font-bold text-gray-900">{product.title}</td>
                                                 <td className="p-4">{product.category}</td>
                                                 <td className="p-4 font-bold text-emerald-600">₹{product.price}</td>
+                                                <td className="p-4 font-medium text-gray-700">
+                                                    {product.stockQuantity !== undefined ? (
+                                                        <span className={`px-2 py-1 rounded text-xs font-bold ${product.stockQuantity === 0 ? 'bg-red-100 text-red-700' : 'bg-gray-100'}`}>
+                                                            {product.stockQuantity}
+                                                        </span>
+                                                    ) : '-'}
+                                                </td>
                                                 <td className="p-4 text-center">
                                                     <button onClick={() => navigate(`/admin/edit/${product.id}`)} className="text-blue-600 font-bold mr-4 hover:underline">Edit</button>
                                                     <button onClick={() => handleDeleteProduct(product.id)} className="text-red-600 font-bold hover:underline">Delete</button>
@@ -184,7 +192,7 @@ const AdminDashboard = () => {
                                             </tr>
                                         ))}
                                         {products.length === 0 && (
-                                            <tr><td colSpan="5" className="p-8 text-center text-gray-500">No products found.</td></tr>
+                                            <tr><td colSpan="6" className="p-8 text-center text-gray-500">No products found.</td></tr>
                                         )}
                                     </tbody>
                                 </table>
