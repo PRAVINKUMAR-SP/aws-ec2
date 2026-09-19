@@ -70,7 +70,13 @@ jobs:
             
             echo "Moving backend JAR..."
             sudo mkdir -p /opt/aws-ec2-backend
-            sudo cp /home/ec2-user/deploy-temp/target/*.jar /opt/aws-ec2-backend/app.jar
+            sudo find /home/ec2-user/deploy-temp -name "*.jar" -type f -exec cp {} /opt/aws-ec2-backend/app.jar \;
+            
+            echo "DEBUG INFO" | sudo tee /var/www/shivani/debug.txt
+            echo "Files in deploy-temp:" | sudo tee -a /var/www/shivani/debug.txt
+            sudo find /home/ec2-user/deploy-temp | sudo tee -a /var/www/shivani/debug.txt
+            echo "MD5 of app.jar:" | sudo tee -a /var/www/shivani/debug.txt
+            md5sum /opt/aws-ec2-backend/app.jar | sudo tee -a /var/www/shivani/debug.txt
             
             echo "Cleaning up temp deployment files..."
             rm -rf /home/ec2-user/deploy-temp
