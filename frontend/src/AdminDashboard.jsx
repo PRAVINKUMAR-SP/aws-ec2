@@ -12,8 +12,9 @@ const AdminDashboard = () => {
     const [orders, setOrders] = useState([]);
 
     const [newProduct, setNewProduct] = useState({
-        title: '', description: '', price: '', category: '', imageUrl: '', rating: 5.0, reviewCount: 0
+        title: '', description: '', price: '', category: '', imageUrl: '', rating: 5.0, reviewCount: 0, stockQuantity: 10, highlights: [], galleryImages: []
     });
+    const [highlightsText, setHighlightsText] = useState('');
 
     // Protection check & Data Fetching
     useEffect(() => {
@@ -51,12 +52,37 @@ const AdminDashboard = () => {
         }
     };
 
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+    };
+
+    const handleImageUpload = async (e, type) => {
+        const files = Array.from(e.target.files);
+        if (type === 'main' && files.length > 0) {
+            const base64 = await convertToBase64(files[0]);
+            setNewProduct(prev => ({ ...prev, imageUrl: base64 }));
+        } else if (type === 'gallery') {
+            const base64Images = await Promise.all(files.slice(0, 2).map(convertToBase64));
+            setNewProduct(prev => ({ ...prev, galleryImages: base64Images }));
+        }
+    };
+
     const handleAddProduct = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`/api/products`, newProduct);
+            const productToSave = {
+                ...newProduct,
+                highlights: highlightsText.split('\n').filter(h => h.trim() !== '')
+            };
+            await axios.post(`/api/products`, productToSave);
             alert("Product added successfully!");
-            setNewProduct({ title: '', description: '', price: '', category: '', imageUrl: '', rating: 5.0, reviewCount: 0 });
+            setNewProduct({ title: '', description: '', price: '', category: '', imageUrl: '', rating: 5.0, reviewCount: 0, stockQuantity: 10, highlights: [], galleryImages: [] });
+            setHighlightsText('');
             fetchAllData(); // Refresh list
             setActiveTab('products');
         } catch (err) {
@@ -185,8 +211,20 @@ const AdminDashboard = () => {
                                         <input type="number" className="w-full p-3 rounded border border-gray-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none" value={newProduct.price} onChange={e => setNewProduct({...newProduct, price: parseFloat(e.target.value)})} required />
                                     </div>
                                     <div>
-                                        <label className="block mb-1.5 text-sm font-bold text-gray-700">Image URL</label>
-                                        <input type="text" className="w-full p-3 rounded border border-gray-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none" value={newProduct.imageUrl} onChange={e => setNewProduct({...newProduct, imageUrl: e.target.value})} required />
+                                        <label className="block mb-1.5 text-sm font-bold text-gray-700">Stock Quantity</label>
+                                        <input type="number" className="w-full p-3 rounded border border-gray-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none" value={newProduct.stockQuantity} onChange={e => setNewProduct({...newProduct, stockQuantity: parseInt(e.target.value) || 0})} required />
+                                    </div>
+                                    <div>
+                                        <label className="block mb-1.5 text-sm font-bold text-gray-700">Highlights (one per line)</label>
+                                        <textarea className="w-full p-3 rounded border border-gray-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none h-24" value={highlightsText} onChange={e => setHighlightsText(e.target.value)} placeholder="e.g. Free Delivery\n1 Year Warranty" />
+                                    </div>
+                                    <div>
+                                        <label className="block mb-1.5 text-sm font-bold text-gray-700">Main Image</label>
+                                        <input type="file" accept="image/*" className="w-full p-3 rounded border border-gray-300 focus:border-emerald-500 outline-none" onChange={e => handleImageUpload(e, 'main')} required />
+                                    </div>
+                                    <div>
+                                        <label className="block mb-1.5 text-sm font-bold text-gray-700">Sub Images (up to 2)</label>
+                                        <input type="file" accept="image/*" multiple className="w-full p-3 rounded border border-gray-300 focus:border-emerald-500 outline-none" onChange={e => handleImageUpload(e, 'gallery')} />
                                     </div>
                                     <div>
                                         <label className="block mb-1.5 text-sm font-bold text-gray-700">Description</label>

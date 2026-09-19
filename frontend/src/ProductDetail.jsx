@@ -174,14 +174,19 @@ const ProductDetail = () => {
                     <div className="p-8 lg:p-10 overflow-y-auto">
                         {/* Title Header */}
                         <div className="mb-6">
-                            {/* Category */}
-                            <div className="mb-3">
+                            {/* Category & Stock Status */}
+                            <div className="mb-3 flex justify-between items-center">
                                 <span
                                     className="text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm"
                                     style={{ backgroundColor: '#eff6ff', color: '#2563eb', display: 'inline-block' }}
                                 >
                                     {product.category}
                                 </span>
+                                {product.stockQuantity !== undefined && (
+                                    <span className={`text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm ${product.stockQuantity > 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
+                                        {product.stockQuantity > 0 ? (product.stockQuantity < 5 ? `Only ${product.stockQuantity} left!` : 'In Stock') : 'Out of Stock'}
+                                    </span>
+                                )}
                             </div>
 
                             {/* Title */}
@@ -268,7 +273,7 @@ const ProductDetail = () => {
                                     {selectedQty}
                                 </span>
                                 <button
-                                    onClick={() => setSelectedQty(Math.min(10, selectedQty + 1))}
+                                    onClick={() => setSelectedQty(Math.min(product.stockQuantity !== undefined ? product.stockQuantity : 10, selectedQty + 1))}
                                     className="w-9 h-9 flex items-center justify-center text-lg font-bold text-gray-600 hover:bg-gray-100 transition-colors"
                                 >+</button>
                             </div>
@@ -289,12 +294,12 @@ const ProductDetail = () => {
                         <div className="mb-5">
                             <h3 className="text-sm font-bold text-gray-900 mb-3">Highlights</h3>
                             <div className="space-y-2">
-                                {[
+                                {(product.highlights && product.highlights.length > 0 ? product.highlights : [
                                     'In Stock & Ready to Ship',
                                     'Free Delivery on orders over ₹499',
                                     '30-Day Money-Back Guarantee',
                                     'Genuine Product | Authorized Seller'
-                                ].map((item, i) => (
+                                ]).map((item, i) => (
                                     <div key={i} className="flex items-center gap-2.5 text-sm text-gray-600">
                                         <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#6b7280' }}></div>
                                         {item}
@@ -327,25 +332,27 @@ const ProductDetail = () => {
                                 onClick={() => {
                                     addToCart(product, selectedQty);
                                 }}
-                                className="flex-1 py-4 rounded-xl font-bold text-base transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
-                                style={{ backgroundColor: '#ff9f00', color: '#ffffff' }}
-                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e68a00'}
-                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ff9f00'}
+                                disabled={product.stockQuantity === 0}
+                                className={`flex-1 py-4 rounded-xl font-bold text-base transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 ${product.stockQuantity === 0 ? 'bg-gray-300 cursor-not-allowed text-gray-500' : ''}`}
+                                style={{ backgroundColor: product.stockQuantity === 0 ? '' : '#ff9f00', color: product.stockQuantity === 0 ? '' : '#ffffff' }}
+                                onMouseEnter={(e) => product.stockQuantity !== 0 && (e.currentTarget.style.backgroundColor = '#e68a00')}
+                                onMouseLeave={(e) => product.stockQuantity !== 0 && (e.currentTarget.style.backgroundColor = '#ff9f00')}
                             >
                                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                                ADD TO CART
+                                {product.stockQuantity === 0 ? 'OUT OF STOCK' : 'ADD TO CART'}
                             </button>
                             <button
                                 onClick={() => {
                                     addToCart(product, selectedQty);
                                     navigate('/cart');
                                 }}
-                                className="flex-1 py-4 rounded-xl font-bold text-base transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
-                                style={{ backgroundColor: '#fb641b', color: '#ffffff' }}
-                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e55b18'}
-                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#fb641b'}
+                                disabled={product.stockQuantity === 0}
+                                className={`flex-1 py-4 rounded-xl font-bold text-base transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 ${product.stockQuantity === 0 ? 'bg-gray-300 cursor-not-allowed text-gray-500' : ''}`}
+                                style={{ backgroundColor: product.stockQuantity === 0 ? '' : '#fb641b', color: product.stockQuantity === 0 ? '' : '#ffffff' }}
+                                onMouseEnter={(e) => product.stockQuantity !== 0 && (e.currentTarget.style.backgroundColor = '#e55b18')}
+                                onMouseLeave={(e) => product.stockQuantity !== 0 && (e.currentTarget.style.backgroundColor = '#fb641b')}
                             >
                                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />

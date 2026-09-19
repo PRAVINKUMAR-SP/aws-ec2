@@ -19,14 +19,21 @@ public class Product {
     private Double price;
     private String category;
     
-    @Column(length = 500)
+    @Column(columnDefinition = "TEXT")
     private String imageUrl;
     
     private Double rating;
     private Integer reviewCount;
+    
+    private Integer stockQuantity;
+    
+    @ElementCollection
+    @CollectionTable(name = "product_highlights", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "highlight", columnDefinition = "TEXT")
+    private java.util.List<String> highlights;
 
     @ElementCollection
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
-    @Column(name = "image_url", length = 500)
+    @Column(name = "image_url", columnDefinition = "TEXT")
     private java.util.List<String> galleryImages;
 }
