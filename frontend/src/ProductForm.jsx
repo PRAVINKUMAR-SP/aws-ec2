@@ -21,7 +21,7 @@ const ProductForm = () => {
         if (userEmail !== 'pravin007ptk@gmail') {
             navigate('/main');
         } else if (id) {
-            axios.get(`http://${window.location.hostname}:8080/api/products/${id}`)
+            axios.get(`/api/products/${id}`)
                 .then(res => setProduct(res.data))
                 .catch(err => console.error(err));
         }
@@ -31,9 +31,9 @@ const ProductForm = () => {
         e.preventDefault();
         try {
             if (id) {
-                await axios.put(`http://${window.location.hostname}:8080/api/products/${id}`, product);
+                await axios.put(`/api/products/${id}`, product);
             } else {
-                await axios.post(`http://${window.location.hostname}:8080/api/products`, product);
+                await axios.post(`/api/products`, product);
             }
             navigate('/admin');
         } catch (err) {

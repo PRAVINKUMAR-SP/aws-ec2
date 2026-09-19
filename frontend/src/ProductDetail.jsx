@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const { addToCart } = useCart();
 
     useEffect(() => {
-        fetch(`http://${window.location.hostname}:8080/api/products/${id}`)
+        fetch(`/api/products/${id}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data);
