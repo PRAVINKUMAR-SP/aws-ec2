@@ -16,18 +16,18 @@ const categories = [
 const CategorySlider = ({ onCategorySelect, activeCategory }) => {
   return (
     <div className="bg-white shadow-sm border-b border-gray-200">
-      <div className="max-w-[1500px] mx-auto px-10 py-6">
-        <div className="flex gap-10 overflow-x-auto no-scrollbar items-center justify-between pb-2">
+      <div className="max-w-[1500px] mx-auto px-3 md:px-10 py-3 md:py-6">
+        <div className="flex gap-4 md:gap-10 overflow-x-auto no-scrollbar items-center pb-1 md:pb-2">
           {categories.map((cat) => (
             <div 
                 key={cat.id} 
-                className="flex flex-col items-center gap-4 cursor-pointer group min-w-[120px]"
+                className="flex flex-col items-center gap-1.5 md:gap-4 cursor-pointer group min-w-[60px] md:min-w-[120px]"
                 onClick={() => onCategorySelect && onCategorySelect(cat.name)}
             >
-              <div className={`w-24 h-24 rounded-full overflow-hidden border-[3px] transition-all duration-300 shadow-md group-hover:shadow-lg ${activeCategory === cat.name ? 'border-accent' : 'border-transparent group-hover:border-accent'}`}>
+              <div className={`w-14 h-14 md:w-24 md:h-24 rounded-full overflow-hidden border-[3px] transition-all duration-300 shadow-md group-hover:shadow-lg ${activeCategory === cat.name ? 'border-accent' : 'border-transparent group-hover:border-accent'}`}>
                 <img src={cat.img} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <span className="text-base font-bold text-gray-800 group-hover:text-accent transition-colors whitespace-nowrap">
+              <span className="text-[10px] md:text-base font-bold text-gray-800 group-hover:text-accent transition-colors whitespace-nowrap">
                 {cat.name}
               </span>
             </div>

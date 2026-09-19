@@ -96,17 +96,17 @@ const Home = () => {
                         Loading products...
                     </div>
                 ) : (
-                    <div className="max-w-[1500px] mx-auto px-10 py-8">
-                        <div className="flex items-center justify-between mb-8">
-                            <h2 className="text-3xl font-extrabold text-gray-800 tracking-tight">Top Products</h2>
+                    <div className="max-w-[1500px] mx-auto px-3 md:px-10 py-4 md:py-8">
+                        <div className="flex items-center justify-between mb-4 md:mb-8">
+                            <h2 className="text-xl md:text-3xl font-extrabold text-gray-800 tracking-tight">Top Products</h2>
                             {products.length > visibleCount && (
-                                <a href="#" onClick={handleViewAll} className="text-accent font-semibold hover:text-accent-dark transition-colors">
+                                <a href="#" onClick={handleViewAll} className="text-accent font-semibold hover:text-accent-dark transition-colors text-sm md:text-base">
                                     View All ({products.length})
                                 </a>
                             )}
                         </div>
                         
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
                             {products.slice(0, visibleCount).map(product => (
                                 <ProductCard key={product.id} product={product} />
                             ))}

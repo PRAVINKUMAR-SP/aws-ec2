@@ -89,9 +89,9 @@ const ProductDetail = () => {
         <div className="min-h-screen text-gray-900" style={{ backgroundColor: '#f1f3f6' }}>
             <Navbar />
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+            <main className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-3 md:py-5">
                 {/* Breadcrumb */}
-                <nav className="flex items-center text-xs text-gray-400 mb-5 font-medium">
+                <nav className="flex items-center text-[10px] md:text-xs text-gray-400 mb-3 md:mb-5 font-medium">
                     <button onClick={() => navigate('/main')} className="hover:text-accent transition-colors flex items-center gap-1">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                         Home
@@ -121,15 +121,15 @@ const ProductDetail = () => {
                             )}
 
                             {/* Main Image Viewport */}
-                            <div className="flex justify-center w-full mb-8 relative group pt-4">
+                            <div className="flex justify-center w-full mb-4 md:mb-8 relative group pt-2 md:pt-4">
                                 <img
                                     src={activeImage}
                                     alt={product.title}
                                     onLoad={() => setImgLoaded(true)}
                                     className="transition-all duration-300"
                                     style={{
-                                        maxWidth: '420px',
-                                        maxHeight: '420px',
+                                        maxWidth: '100%',
+                                        maxHeight: '280px',
                                         width: '100%',
                                         height: 'auto',
                                         objectFit: 'contain',
@@ -146,12 +146,12 @@ const ProductDetail = () => {
                             </div>
 
                             {/* Sub Images Gallery */}
-                            <div className="flex justify-center gap-4 w-full pb-4">
+                            <div className="flex justify-center gap-2 md:gap-4 w-full pb-2 md:pb-4">
                                 {galleryImages.map((imgUrl, idx) => (
                                     <div
                                         key={idx}
                                         onClick={() => { setImgLoaded(false); setActiveImage(imgUrl); }}
-                                        className="w-24 h-24 rounded-lg flex items-center justify-center p-2 cursor-pointer bg-white transition-all duration-200"
+                                        className="w-14 h-14 md:w-24 md:h-24 rounded-lg flex items-center justify-center p-1 md:p-2 cursor-pointer bg-white transition-all duration-200"
                                         style={{
                                             border: activeImage === imgUrl ? '2px solid #2563eb' : '1px solid #e5e7eb',
                                             boxShadow: activeImage === imgUrl ? '0 0 0 1px rgba(37, 99, 235, 0.2)' : 'none'
@@ -170,9 +170,9 @@ const ProductDetail = () => {
                     </div>
 
                     {/* RIGHT: Product Details */}
-                    <div className="p-5 lg:p-10 overflow-y-auto">
+                    <div className="p-4 md:p-10 overflow-y-auto">
                         {/* Title Header */}
-                        <div className="mb-6">
+                        <div className="mb-4 md:mb-6">
                             {/* Category & Stock Status */}
                             <div className="mb-3 flex justify-between items-center">
                                 <span
@@ -189,7 +189,7 @@ const ProductDetail = () => {
                             </div>
 
                             {/* Title */}
-                            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+                            <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 md:mb-4 leading-tight">
                                 {product.title}
                             </h1>
 
@@ -216,9 +216,9 @@ const ProductDetail = () => {
                         </div>
 
                         {/* Price Section */}
-                        <div className="flex flex-col items-start mb-8 w-full">
-                            <div className="flex items-baseline gap-2 mb-2">
-                                <span className="text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">₹{product.price.toFixed(0)}</span>
+                        <div className="flex flex-col items-start mb-4 md:mb-8 w-full">
+                            <div className="flex items-baseline gap-2 mb-1 md:mb-2">
+                                <span className="text-2xl md:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">₹{product.price.toFixed(0)}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <span className="text-base text-gray-400 line-through font-medium">₹{discountedPrice}</span>
@@ -326,13 +326,13 @@ const ProductDetail = () => {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex gap-4 mt-8 pt-6" style={{ borderTop: '1px solid #e5e7eb' }}>
+                        <div className="flex gap-2 md:gap-4 mt-4 md:mt-8 pt-4 md:pt-6" style={{ borderTop: '1px solid #e5e7eb' }}>
                             <button
                                 onClick={() => {
                                     addToCart(product, selectedQty);
                                 }}
                                 disabled={product.stockQuantity === 0}
-                                className={`flex-1 py-4 rounded-xl font-bold text-base transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 ${product.stockQuantity === 0 ? 'bg-gray-300 cursor-not-allowed text-gray-500' : ''}`}
+                                className={`flex-1 py-2.5 md:py-4 rounded-xl font-bold text-sm md:text-base transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 md:gap-2 ${product.stockQuantity === 0 ? 'bg-gray-300 cursor-not-allowed text-gray-500' : ''}`}
                                 style={{ backgroundColor: product.stockQuantity === 0 ? '' : '#ff9f00', color: product.stockQuantity === 0 ? '' : '#ffffff' }}
                                 onMouseEnter={(e) => product.stockQuantity !== 0 && (e.currentTarget.style.backgroundColor = '#e68a00')}
                                 onMouseLeave={(e) => product.stockQuantity !== 0 && (e.currentTarget.style.backgroundColor = '#ff9f00')}
@@ -348,7 +348,7 @@ const ProductDetail = () => {
                                     navigate('/cart');
                                 }}
                                 disabled={product.stockQuantity === 0}
-                                className={`flex-1 py-4 rounded-xl font-bold text-base transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 ${product.stockQuantity === 0 ? 'bg-gray-300 cursor-not-allowed text-gray-500' : ''}`}
+                                className={`flex-1 py-2.5 md:py-4 rounded-xl font-bold text-sm md:text-base transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 md:gap-2 ${product.stockQuantity === 0 ? 'bg-gray-300 cursor-not-allowed text-gray-500' : ''}`}
                                 style={{ backgroundColor: product.stockQuantity === 0 ? '' : '#fb641b', color: product.stockQuantity === 0 ? '' : '#ffffff' }}
                                 onMouseEnter={(e) => product.stockQuantity !== 0 && (e.currentTarget.style.backgroundColor = '#e55b18')}
                                 onMouseLeave={(e) => product.stockQuantity !== 0 && (e.currentTarget.style.backgroundColor = '#fb641b')}

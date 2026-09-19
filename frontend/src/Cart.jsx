@@ -39,26 +39,26 @@ const Cart = () => {
         <div className="min-h-screen text-gray-900 bg-gray-50">
             <Navbar />
             
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-                <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+            <main className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-4 md:py-10">
+                <h1 className="text-xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-8">Shopping Cart</h1>
                 
                 <div className="flex flex-col lg:flex-row gap-8">
                     
                     {/* Left: Cart Items */}
-                    <div className="flex-1 space-y-6">
-                        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                            <div className="p-6 bg-gray-50/50 border-b border-gray-100 flex justify-between items-center">
-                                <h2 className="font-semibold text-lg text-gray-800">Cart ({getCartCount()} Items)</h2>
-                                <button onClick={clearCart} className="text-sm font-medium text-red-500 hover:text-red-700 hover:underline">
+                    <div className="flex-1 space-y-3 md:space-y-6">
+                        <div className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                            <div className="p-3 md:p-6 bg-gray-50/50 border-b border-gray-100 flex justify-between items-center">
+                                <h2 className="font-semibold text-sm md:text-lg text-gray-800">Cart ({getCartCount()} Items)</h2>
+                                <button onClick={clearCart} className="text-xs md:text-sm font-medium text-red-500 hover:text-red-700 hover:underline">
                                     Clear Cart
                                 </button>
                             </div>
                             
                             <div className="divide-y divide-gray-100">
                                 {cart.map((item) => (
-                                    <div key={item.id} className="p-6 flex flex-col sm:flex-row gap-6">
+                                    <div key={item.id} className="p-3 md:p-6 flex gap-3 md:gap-6">
                                         {/* Product Image */}
-                                        <div className="w-full sm:w-32 h-32 flex-shrink-0 bg-gray-50 rounded-xl p-3 flex items-center justify-center cursor-pointer" onClick={() => navigate(`/product/${item.id}`)}>
+                                        <div className="w-20 h-20 md:w-32 md:h-32 flex-shrink-0 bg-gray-50 rounded-lg md:rounded-xl p-2 md:p-3 flex items-center justify-center cursor-pointer" onClick={() => navigate(`/product/${item.id}`)}>
                                             <img 
                                                 src={item.imageUrl} 
                                                 alt={item.title}
@@ -69,15 +69,15 @@ const Cart = () => {
                                         {/* Product Details */}
                                         <div className="flex-1 flex flex-col">
                                             <div className="flex justify-between items-start">
-                                                <div>
-                                                    <h3 className="text-lg font-bold text-gray-900 mb-1 hover:text-emerald-600 cursor-pointer transition-colors line-clamp-1" onClick={() => navigate(`/product/${item.id}`)}>
+                                                <div className="min-w-0 flex-1">
+                                                    <h3 className="text-sm md:text-lg font-bold text-gray-900 mb-0.5 md:mb-1 hover:text-emerald-600 cursor-pointer transition-colors line-clamp-1" onClick={() => navigate(`/product/${item.id}`)}>
                                                         {item.title}
                                                     </h3>
-                                                    <p className="text-sm text-gray-500 mb-4">{item.category}</p>
+                                                    <p className="text-xs md:text-sm text-gray-500 mb-2 md:mb-4">{item.category}</p>
                                                 </div>
-                                                <div className="text-right">
-                                                    <div className="text-xl font-bold text-gray-900">₹{item.price.toFixed(0)}</div>
-                                                    <div className="text-sm text-emerald-600 font-medium">In Stock</div>
+                                                <div className="text-right ml-2 flex-shrink-0">
+                                                    <div className="text-base md:text-xl font-bold text-gray-900">₹{item.price.toFixed(0)}</div>
+                                                    <div className="text-[10px] md:text-sm text-emerald-600 font-medium">In Stock</div>
                                                 </div>
                                             </div>
                                             
@@ -115,8 +115,8 @@ const Cart = () => {
                     
                     {/* Right: Order Summary */}
                     <div className="w-full lg:w-[380px] flex-shrink-0">
-                        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-28">
-                            <h2 className="text-lg font-bold text-gray-800 mb-6 uppercase tracking-wide border-b border-gray-100 pb-4">Order Summary</h2>
+                        <div className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 p-4 md:p-6 sticky top-28">
+                            <h2 className="text-sm md:text-lg font-bold text-gray-800 mb-4 md:mb-6 uppercase tracking-wide border-b border-gray-100 pb-3 md:pb-4">Order Summary</h2>
                             
                             <div className="space-y-4 text-gray-600 mb-6 border-b border-gray-100 pb-6">
                                 <div className="flex justify-between">

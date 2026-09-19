@@ -2,25 +2,25 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="bg-indigo-950 text-gray-300 py-12 mt-auto border-t border-indigo-900">
-            <div className="max-w-[1500px] mx-auto px-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <footer className="bg-indigo-950 text-gray-300 py-8 md:py-12 mt-auto border-t border-indigo-900">
+            <div className="max-w-[1500px] mx-auto px-4 md:px-10">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
                     
                     {/* Brand Section */}
-                    <div className="space-y-4">
-                        <div className="text-3xl font-extrabold tracking-tight italic flex items-center">
+                    <div className="space-y-3 md:space-y-4 col-span-2 md:col-span-1">
+                        <div className="text-2xl md:text-3xl font-extrabold tracking-tight italic flex items-center">
                             <span className="text-emerald-400">A2Z</span>
                             <span className="text-white">~cart</span>
                         </div>
-                        <p className="text-sm text-gray-400 leading-relaxed">
+                        <p className="text-xs md:text-sm text-gray-400 leading-relaxed">
                             Your one-stop destination for premium products. Experience seamless shopping, fast delivery, and top-tier customer service.
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="text-white font-bold text-lg mb-4">Quick Links</h3>
-                        <ul className="space-y-2 text-sm">
+                        <h3 className="text-white font-bold text-sm md:text-lg mb-3 md:mb-4">Quick Links</h3>
+                        <ul className="space-y-1.5 md:space-y-2 text-xs md:text-sm">
                             <li><a href="/main" className="hover:text-emerald-400 transition-colors">Home</a></li>
                             <li><a href="/profile" className="hover:text-emerald-400 transition-colors">My Account</a></li>
                             <li><a href="/orders" className="hover:text-emerald-400 transition-colors">Order History</a></li>
@@ -30,8 +30,8 @@ const Footer = () => {
 
                     {/* Customer Service */}
                     <div>
-                        <h3 className="text-white font-bold text-lg mb-4">Customer Service</h3>
-                        <ul className="space-y-2 text-sm">
+                        <h3 className="text-white font-bold text-sm md:text-lg mb-3 md:mb-4">Customer Service</h3>
+                        <ul className="space-y-1.5 md:space-y-2 text-xs md:text-sm">
                             <li><a href="#" className="hover:text-emerald-400 transition-colors">Help Center</a></li>
                             <li><a href="#" className="hover:text-emerald-400 transition-colors">Returns & Refunds</a></li>
                             <li><a href="#" className="hover:text-emerald-400 transition-colors">Shipping Info</a></li>
@@ -40,9 +40,9 @@ const Footer = () => {
                     </div>
 
                     {/* Newsletter / Contact */}
-                    <div>
-                        <h3 className="text-white font-bold text-lg mb-4">Stay Connected</h3>
-                        <p className="text-sm text-gray-400 mb-4">Subscribe to get special offers, free giveaways, and updates.</p>
+                    <div className="col-span-2 md:col-span-1">
+                        <h3 className="text-white font-bold text-sm md:text-lg mb-3 md:mb-4">Stay Connected</h3>
+                        <p className="text-xs md:text-sm text-gray-400 mb-3 md:mb-4">Subscribe to get special offers, free giveaways, and updates.</p>
                         <div className="flex">
                             <input 
                                 type="email" 
