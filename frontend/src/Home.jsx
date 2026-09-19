@@ -16,9 +16,9 @@ const Home = () => {
         fetchProducts();
     }, []);
 
-    const fetchProducts = async (searchQuery = '') => {
+    const fetchProducts = async (searchQuery = '', showLoader = true) => {
         try {
-            setLoading(true);
+            if (showLoader) setLoading(true);
             const url = searchQuery 
                 ? `/api/products/search?q=${searchQuery}`
                 : `/api/products`;
@@ -40,7 +40,7 @@ const Home = () => {
     };
 
     const handleSearch = (query) => {
-        fetchProducts(query);
+        fetchProducts(query, false);
     };
 
     const handleCategorySelect = async (categoryName) => {
