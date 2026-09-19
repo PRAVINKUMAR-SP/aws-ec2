@@ -204,7 +204,19 @@ const AdminDashboard = () => {
                                     </div>
                                     <div>
                                         <label className="block mb-1.5 text-sm font-bold text-gray-700">Category</label>
-                                        <input type="text" className="w-full p-3 rounded border border-gray-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none" value={newProduct.category} onChange={e => setNewProduct({...newProduct, category: e.target.value})} required />
+                                        <select className="w-full p-3 rounded border border-gray-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none" value={newProduct.category} onChange={e => setNewProduct({...newProduct, category: e.target.value})} required>
+                                            <option value="" disabled>Select a category</option>
+                                            <option value="Mobiles">Mobiles</option>
+                                            <option value="Fashion">Fashion</option>
+                                            <option value="Electronics">Electronics</option>
+                                            <option value="Home">Home</option>
+                                            <option value="Appliances">Appliances</option>
+                                            <option value="Toys">Toys</option>
+                                            <option value="Beauty">Beauty</option>
+                                            <option value="Sports">Sports</option>
+                                            <option value="Books">Books</option>
+                                            <option value="Groceries">Groceries</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label className="block mb-1.5 text-sm font-bold text-gray-700">Price (₹)</label>
