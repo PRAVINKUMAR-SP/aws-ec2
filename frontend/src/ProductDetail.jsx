@@ -15,7 +15,6 @@ const ProductDetail = () => {
     const { addToCart } = useCart();
 
     useEffect(() => {
-        window.scrollTo(0, 0);
         fetch(`/api/products/${id}`)
             .then(res => res.json())
             .then(data => {

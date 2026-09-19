@@ -11,11 +11,13 @@ import Checkout from './Checkout';
 import OrderSuccess from './OrderSuccess';
 import Profile from './Profile';
 import Orders from './Orders';
+import ScrollToTop from './components/ScrollToTop';
 import './index.css';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen bg-page text-gray-900 font-sans">
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
