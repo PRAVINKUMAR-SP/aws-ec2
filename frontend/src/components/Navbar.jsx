@@ -75,13 +75,13 @@ const Navbar = ({ onSearch, onReset }) => {
     };
 
     return (
-        <nav className="bg-gradient-to-r from-blue-900 to-indigo-950 px-16 py-5 flex justify-between items-center sticky top-0 z-50 shadow-md border-b border-indigo-900">
-            <div className="text-3xl font-extrabold cursor-pointer tracking-tight italic flex items-center" onClick={handleLogoClick}>
+        <nav className="bg-gradient-to-r from-blue-900 to-indigo-950 px-4 md:px-16 py-4 md:py-5 flex justify-between items-center sticky top-0 z-50 shadow-md border-b border-indigo-900">
+            <div className="text-2xl md:text-3xl font-extrabold cursor-pointer tracking-tight italic flex items-center" onClick={handleLogoClick}>
                 <span className="text-emerald-400 drop-shadow-md">A2Z</span>
                 <span className="text-white drop-shadow-md">~cart</span>
             </div>
             
-            <div className="flex-grow max-w-3xl mx-12 relative group" ref={searchRef}>
+            <div className="flex-grow max-w-3xl mx-4 md:mx-12 relative group" ref={searchRef}>
                 <input 
                     className="w-full pl-12 pr-6 py-2.5 rounded-full border-0 text-base shadow-inner bg-white/95 text-gray-800 placeholder-gray-500 focus:bg-white focus:ring-2 focus:ring-emerald-400 focus:outline-none transition-all duration-300"
                     type="text" 
@@ -133,17 +133,17 @@ const Navbar = ({ onSearch, onReset }) => {
                 )}
             </div>
             
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-1 md:gap-2 items-center">
                 {isAdmin && (
-                    <button className="flex items-center gap-1.5 bg-emerald-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-emerald-600 transition-colors shadow-md mr-2" onClick={() => navigate('/admin')}>
+                    <button className="flex items-center gap-1.5 bg-emerald-500 text-white px-2 md:px-4 py-2 rounded-md font-semibold hover:bg-emerald-600 transition-colors shadow-md mr-1 md:mr-2" onClick={() => navigate('/admin')}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <span>Admin Panel</span>
+                        <span className="hidden sm:inline">Admin Panel</span>
                     </button>
                 )}
-                <button className="flex items-center gap-2 text-white text-base font-medium px-4 py-2 rounded-md hover:bg-white/10 transition-colors" onClick={() => navigate('/cart')}>
+                <button className="flex items-center gap-1 md:gap-2 text-white text-base font-medium px-2 md:px-4 py-2 rounded-md hover:bg-white/10 transition-colors" onClick={() => navigate('/cart')}>
                     <div className="relative flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -154,15 +154,15 @@ const Navbar = ({ onSearch, onReset }) => {
                             </span>
                         )}
                     </div>
-                    <span className="ml-1">Cart</span>
+                    <span className="ml-1 hidden sm:inline">Cart</span>
                 </button>
                 {/* User Account Dropdown */}
-                <div className="relative group ml-2">
-                    <button className="flex items-center gap-2 text-white text-base font-medium px-4 py-2 rounded-md hover:bg-white/10 transition-colors">
+                <div className="relative group ml-1 md:ml-2">
+                    <button className="flex items-center gap-1 md:gap-2 text-white text-base font-medium px-2 md:px-4 py-2 rounded-md hover:bg-white/10 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span>Account</span>
+                        <span className="hidden sm:inline">Account</span>
                     </button>
                     
                     {/* Dropdown Menu */}

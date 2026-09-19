@@ -104,13 +104,12 @@ const ProductDetail = () => {
 
                 {/* Product Card */}
                 <div
-                    className="bg-white rounded-2xl overflow-hidden border border-gray-200"
-                    style={{ display: 'grid', gridTemplateColumns: '45% 55%', minHeight: '580px', boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}
+                    className="bg-white rounded-2xl overflow-hidden border border-gray-200 flex flex-col lg:grid lg:grid-cols-2"
+                    style={{ minHeight: '580px', boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}
                 >
-                    {/* LEFT: Image Section */}
                     {/* LEFT: Image Section (Sticky) */}
-                    <div className="relative bg-white border-r border-gray-200">
-                        <div className="sticky top-0 p-8 flex flex-col items-center h-full min-h-[580px]">
+                    <div className="relative bg-white border-b lg:border-b-0 lg:border-r border-gray-200">
+                        <div className="lg:sticky lg:top-0 p-5 lg:p-8 flex flex-col items-center h-full lg:min-h-[580px]">
                             {/* Sale Badge */}
                             {product.price < 500 && (
                                 <div
@@ -171,7 +170,7 @@ const ProductDetail = () => {
                     </div>
 
                     {/* RIGHT: Product Details */}
-                    <div className="p-8 lg:p-10 overflow-y-auto">
+                    <div className="p-5 lg:p-10 overflow-y-auto">
                         {/* Title Header */}
                         <div className="mb-6">
                             {/* Category & Stock Status */}

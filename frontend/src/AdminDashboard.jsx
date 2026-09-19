@@ -94,34 +94,34 @@ const AdminDashboard = () => {
     return (
         <div className="flex flex-col min-h-screen bg-gray-50">
             <Navbar />
-            <div className="flex flex-1 overflow-hidden">
+            <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
                 {/* Sidebar */}
-                <aside className="w-64 bg-indigo-950 text-white flex flex-col shadow-xl z-10">
-                    <div className="p-6">
-                        <h2 className="text-xl font-bold text-emerald-400 uppercase tracking-wider">Admin Portal</h2>
+                <aside className="w-full md:w-64 bg-indigo-950 text-white flex flex-col shadow-xl z-10 flex-shrink-0">
+                    <div className="p-4 md:p-6">
+                        <h2 className="text-lg md:text-xl font-bold text-emerald-400 uppercase tracking-wider">Admin Portal</h2>
                     </div>
-                    <nav className="flex-1 px-4 space-y-2 mt-4">
-                        <button onClick={() => setActiveTab('dashboard')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === 'dashboard' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
+                    <nav className="flex-none md:flex-1 px-2 md:px-4 space-x-2 md:space-x-0 md:space-y-2 mb-2 md:mb-0 md:mt-4 flex flex-row overflow-x-auto md:flex-col md:overflow-visible pb-2 md:pb-0">
+                        <button onClick={() => setActiveTab('dashboard')} className={`flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'dashboard' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
                             Dashboard
                         </button>
-                        <button onClick={() => setActiveTab('products')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === 'products' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
+                        <button onClick={() => setActiveTab('products')} className={`flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'products' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
                             Products
                         </button>
-                        <button onClick={() => setActiveTab('add_product')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === 'add_product' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
+                        <button onClick={() => setActiveTab('add_product')} className={`flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'add_product' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
                             Add Product
                         </button>
-                        <button onClick={() => setActiveTab('users')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === 'users' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
+                        <button onClick={() => setActiveTab('users')} className={`flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'users' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                             Users
                         </button>
-                        <button onClick={() => setActiveTab('orders')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === 'orders' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
+                        <button onClick={() => setActiveTab('orders')} className={`flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'orders' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
                             Orders
                         </button>
-                        <button onClick={() => setActiveTab('settings')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${activeTab === 'settings' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
+                        <button onClick={() => setActiveTab('settings')} className={`flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'settings' ? 'bg-emerald-500 text-white shadow-md' : 'text-indigo-200 hover:bg-indigo-900 hover:text-white'}`}>
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                             Settings
                         </button>
@@ -129,7 +129,7 @@ const AdminDashboard = () => {
                 </aside>
 
                 {/* Main Content Area */}
-                <main className="flex-1 overflow-y-auto p-10 bg-gray-50">
+                <main className="flex-1 overflow-y-auto p-4 md:p-10 bg-gray-50">
                     
                     {/* Dashboard Tab */}
                     {activeTab === 'dashboard' && (
@@ -159,8 +159,8 @@ const AdminDashboard = () => {
                                 <h1 className="text-3xl font-bold text-gray-900">Manage Products</h1>
                                 <button onClick={() => setActiveTab('add_product')} className="bg-emerald-500 text-white px-5 py-2.5 rounded shadow-sm hover:bg-emerald-600 font-medium">+ Add New Product</button>
                             </div>
-                            <div className="bg-white shadow-sm rounded-xl overflow-hidden border border-gray-200">
-                                <table className="w-full border-collapse text-left text-sm text-gray-700">
+                            <div className="bg-white shadow-sm rounded-xl overflow-x-auto border border-gray-200">
+                                <table className="w-full min-w-[600px] border-collapse text-left text-sm text-gray-700">
                                     <thead className="bg-gray-50 border-b border-gray-200 text-gray-900 font-medium">
                                         <tr>
                                             <th className="p-4">Image</th>
@@ -260,8 +260,8 @@ const AdminDashboard = () => {
                     {activeTab === 'users' && (
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900 mb-8">Registered Users</h1>
-                            <div className="bg-white shadow-sm rounded-xl overflow-hidden border border-gray-200">
-                                <table className="w-full border-collapse text-left text-sm text-gray-700">
+                            <div className="bg-white shadow-sm rounded-xl overflow-x-auto border border-gray-200">
+                                <table className="w-full min-w-[500px] border-collapse text-left text-sm text-gray-700">
                                     <thead className="bg-gray-50 border-b border-gray-200 text-gray-900 font-medium">
                                         <tr>
                                             <th className="p-4">ID</th>
@@ -296,8 +296,8 @@ const AdminDashboard = () => {
                     {activeTab === 'orders' && (
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900 mb-8">Global Orders</h1>
-                            <div className="bg-white shadow-sm rounded-xl overflow-hidden border border-gray-200">
-                                <table className="w-full border-collapse text-left text-sm text-gray-700">
+                            <div className="bg-white shadow-sm rounded-xl overflow-x-auto border border-gray-200">
+                                <table className="w-full min-w-[600px] border-collapse text-left text-sm text-gray-700">
                                     <thead className="bg-gray-50 border-b border-gray-200 text-gray-900 font-medium">
                                         <tr>
                                             <th className="p-4">Order ID</th>
