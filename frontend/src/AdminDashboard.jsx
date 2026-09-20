@@ -88,7 +88,8 @@ const AdminDashboard = () => {
             setActiveTab('products');
         } catch (err) {
             console.error(err);
-            alert("Failed to save product.");
+            const serverMsg = err.response && err.response.data ? err.response.data : err.message;
+            alert("Failed to save product. Backend says:\n\n" + (typeof serverMsg === 'string' ? serverMsg : JSON.stringify(serverMsg)));
         }
     };
 
