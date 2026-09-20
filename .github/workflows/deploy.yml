@@ -99,8 +99,8 @@ jobs:
             echo "=== BACKEND STATUS ==="
             sudo systemctl status shivani-backend --no-pager || true
             
-            echo "=== LAST 50 LINES OF BACKEND LOG ==="
-            sudo journalctl -u shivani-backend -n 50 --no-pager || true
+            echo "=== LAST 100 LINES OF BACKEND LOG ==="
+            sudo journalctl -u shivani-backend -n 100 --no-pager | sudo tee /var/www/shivani/backend-error.txt
             
             echo "Restarting Nginx and fixing 413 upload size limit..."
             echo "client_max_body_size 50M;" | sudo tee /etc/nginx/conf.d/upload_size.conf
