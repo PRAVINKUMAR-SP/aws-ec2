@@ -84,5 +84,6 @@ jobs:
             echo "Starting backend systemd service..."
             sudo systemctl start shivani-backend
             
-            echo "Restarting Nginx..."
+            echo "Restarting Nginx and fixing 413 upload size limit..."
+            echo "client_max_body_size 50M;" | sudo tee /etc/nginx/conf.d/upload_size.conf
             sudo systemctl restart nginx
