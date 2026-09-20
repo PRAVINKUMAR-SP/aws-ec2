@@ -39,24 +39,38 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productRepository.save(product);
+    public ResponseEntity<?> createProduct(@RequestBody Product product) {
+        try {
+            return ResponseEntity.ok(productRepository.save(product));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error creating product: " + e.getMessage() + (e.getCause() != null ? " | Cause: " + e.getCause().getMessage() : ""));
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
-        return productRepository.findById(id)
-                .map(product -> {
-                    product.setTitle(productDetails.getTitle());
-                    product.setDescription(productDetails.getDescription());
-                    product.setPrice(productDetails.getPrice());
-                    product.setCategory(productDetails.getCategory());
-                    product.setImageUrl(productDetails.getImageUrl());
-                    product.setRating(productDetails.getRating());
-                    product.setReviewCount(productDetails.getReviewCount());
-                    return ResponseEntity.ok(productRepository.save(product));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
+        try {
+            return productRepository.findById(id)
+                    .map(product -> {
+                        product.setTitle(productDetails.getTitle());
+                        product.setDescription(productDetails.getDescription());
+                        product.setPrice(productDetails.getPrice());
+                        product.setCategory(productDetails.getCategory());
+                        product.setImageUrl(productDetails.getImageUrl());
+                        product.setRating(productDetails.getRating());
+                        product.setReviewCount(productDetails.getReviewCount());
+                        // Important: Also update new fields
+                        product.setStockQuantity(productDetails.getStockQuantity());
+                        product.setHighlights(productDetails.getHighlights());
+                        product.setGalleryImages(productDetails.getGalleryImages());
+                        return ResponseEntity.ok(productRepository.save(product));
+                    })
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error updating product: " + e.getMessage() + (e.getCause() != null ? " | Cause: " + e.getCause().getMessage() : ""));
+        }
     }
 
     @DeleteMapping("/{id}")
