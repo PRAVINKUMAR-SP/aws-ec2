@@ -88,10 +88,22 @@ jobs:
             
             echo "Force killing any remaining java processes to prevent port 8080 conflicts (502 error)..."
             sudo killall -9 java || true
+            sleep 2
             
             echo "Starting backend systemd service..."
             sudo systemctl start shivani-backend
             
+            echo "Waiting 20 seconds for Spring Boot to initialize..."
+            sleep 20
+            
+            echo "=== BACKEND STATUS ==="
+            sudo systemctl status shivani-backend --no-pager || true
+            
+            echo "=== LAST 50 LINES OF BACKEND LOG ==="
+            sudo journalctl -u shivani-backend -n 50 --no-pager || true
+            
             echo "Restarting Nginx and fixing 413 upload size limit..."
             echo "client_max_body_size 50M;" | sudo tee /etc/nginx/conf.d/upload_size.conf
             sudo systemctl restart nginx
+            
+            echo "Deployment complete."
