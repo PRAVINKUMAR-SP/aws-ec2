@@ -41,7 +41,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<?> createProduct(@RequestBody Product product) {
         try {
-            return ResponseEntity.ok(productRepository.save(product));
+            return ResponseEntity.ok(productRepository.saveAndFlush(product));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error creating product: " + e.getMessage() + (e.getCause() != null ? " | Cause: " + e.getCause().getMessage() : ""));

@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import jakarta.annotation.PostConstruct;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 
 @Component
 public class DatabaseFixer {
@@ -15,7 +16,7 @@ public class DatabaseFixer {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @PostConstruct
+    @EventListener(ApplicationReadyEvent.class)
     public void fixDatabase() {
         logger.info("Running automatic database column type fixes for Base64 image support...");
 
