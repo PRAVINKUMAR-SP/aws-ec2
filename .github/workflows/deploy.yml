@@ -62,11 +62,11 @@ jobs:
             sudo rm -rf /var/www/shivani/*
             sudo cp -r /home/ec2-user/deploy-temp/dist/* /var/www/shivani/
             
-            echo "Stopping backend systemd service..."
-            sudo systemctl stop shivani-backend
+            echo "Checking disk space..."
+            df -h
             
-            echo "Force killing any stray Java process..."
-            sudo pkill -9 -f java || true
+            echo "Stopping backend systemd service..."
+            sudo systemctl stop shivani-backend || true
             
             echo "Moving backend JAR..."
             sudo mkdir -p /opt/aws-ec2-backend
